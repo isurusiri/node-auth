@@ -1,0 +1,24 @@
+{
+  "name": "oauth-token-authentication",
+  "version": "1.0.0",
+  "description": "demo application for understanding jwt and oauth functionality in node js based rest apis.",
+  "main": "server.js",
+  "scripts": {
+    "test": "tst"
+  },
+  "keywords": [
+    "node",
+    "js",
+    "oauth",
+    "jwt"
+  ],
+  "author": "isuru siriwardana",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "jsonwebtoken": "^7.0.1",
+    "mongoose": "^4.5.2",
+    "morgan": "^1.7.0"
+  }
+}
