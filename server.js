@@ -33,7 +33,6 @@ app.get('/', function(req, res) {
 });
 
 // API ROUTES -------------------
-// we'll get to these in a second
 
 // =======================
 // start the server ======

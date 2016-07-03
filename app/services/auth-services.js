@@ -1,5 +1,5 @@
 var jwt    = require('jsonwebtoken'); // used to create, sign, and verify tokens
-var User   = require('./app/models/user'); // get our mongoose model
+//var User   = require('./app/models/user.js'); // get our mongoose model
 
 var AuthenticateUser = function(req, res) {
     // find the user
