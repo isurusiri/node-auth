@@ -2,7 +2,7 @@ var jwt    = require('jsonwebtoken'); // used to create, sign, and verify tokens
 //var User   = require('./app/models/user.js'); // get our mongoose model
 
 
-var setUpUser = function (req, res) {
+var SetUpUser = function (req, res) {
   // create a sample user
   var isuru = new User({ 
     name: 'isuru', 
@@ -19,4 +19,4 @@ var setUpUser = function (req, res) {
   });
 }
 
-module.exports = setUpUser;
+module.exports = SetUpUser;
