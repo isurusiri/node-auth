@@ -9,6 +9,8 @@ var config = require('./config'); // get our config file
 var User   = require('./app/models/user'); // get our mongoose model
 
 var authServices = require('./app/services/auth-services');
+var generalServices = require('./app/services/general-services');
+var middlewareServices = require('./app/services/middleware-services');
     
 // =======================
 // configuration =========
@@ -32,8 +34,6 @@ app.get('/', function(req, res) {
     res.send('Hello! The API is at http://localhost:' + port + '/api');
 });
 
-// API ROUTES -------------------
-
 // =======================
 // start the server ======
 // =======================
@@ -41,61 +41,16 @@ app.listen(port);
 console.log('Awesomeness is at http://localhost:' + port);
 
 app.get('/setup', function(req, res) {
-
-  // create a sample user
-  var isuru = new User({ 
-    name: 'isuru', 
-    password: 'password',
-    admin: true 
-  });
-
-  // save the sample user
-  isuru.save(function(err) {
-    if (err) throw err;
-
-    console.log('User saved successfully');
-    res.json({ success: true });
-  });
+  generalServices.SetUpUser(req, res);
 });
 
 // API ROUTES -------------------
-
 // get an instance of the router for api routes
 var apiRoutes = express.Router(); 
 
-// TODO: route to authenticate a user (POST http://localhost:8080/api/authenticate)
-
-
 // route middleware to verify a token
 apiRoutes.use(function(req, res, next) {
-
-  // check header or url parameters or post parameters for token
-  var token = req.body.token || req.query.token || req.headers['x-access-token'];
-
-  // decode token
-  if (token) {
-
-    // verifies secret and checks exp
-    jwt.verify(token, app.get('superSecret'), function(err, decoded) {      
-      if (err) {
-        return res.json({ success: false, message: 'Failed to authenticate token.' });    
-      } else {
-        // if everything is good, save to request for use in other routes
-        req.decoded = decoded;    
-        next();
-      }
-    });
-
-  } else {
-
-    // if there is no token
-    // return an error
-    return res.status(403).send({ 
-        success: false, 
-        message: 'No token provided.' 
-    });
-    
-  }
+  middlewareServices.CheckToken(req, res, next); 
 });
 
 // route to show a random message (GET http://localhost:8080/api/)
